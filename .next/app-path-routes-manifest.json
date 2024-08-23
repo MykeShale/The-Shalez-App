@@ -1,0 +1,9 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/about-us/page": "/about-us",
+  "/blog/page": "/blog",
+  "/projects/page": "/projects",
+  "/pricing/page": "/pricing",
+  "/services/page": "/services"
+}

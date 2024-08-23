@@ -1,0 +1,46 @@
+image: node:20
+
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  NODE_ENV: 'production'
+
+before_script:
+  - npm ci
+  # Install TypeScript declaration files
+  - npm install --save-dev @types/react-slick
+
+install:
+  stage: install
+  script:
+    - npm ci
+    - npm install --save-dev @types/react-slick
+
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+      - .next/cache
+
+test:
+  stage: test
+  script:
+    - npm run lint
+    
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
